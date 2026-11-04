@@ -20,9 +20,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Sync server.json version to tag
+        # Only sync when running on a version tag (v*). On workflow_dispatch
+        # (ref = refs/heads/main) keep the version committed in server.json.
         run: |
-          TAG="${GITHUB_REF#refs/tags/}"
-          VER="${TAG#v}"
+          VER=""
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+            VER="${TAG#v}"
+          fi
           if [ -n "$VER" ]; then
             python3 - "$VER" << 'EOF'
           import json, sys
@@ -34,6 +39,8 @@ jobs:
           json.dump(d, open('server.json', 'w'), indent=2, ensure_ascii=False)
           print('server.json version ->', ver)
           EOF
+          else
+            echo "No version tag ($GITHUB_REF); keeping server.json version as-is"
           fi
 
       - name: Install mcp-publisher
