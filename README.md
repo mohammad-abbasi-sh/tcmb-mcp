@@ -1,5 +1,7 @@
 # tcmb-mcp 🇹🇷
 
+mcp-name: io.github.mohammad-abbasi-sh/tcmb-mcp
+
 Unofficial **read-only** MCP server for the **Central Bank of the Republic of Türkiye (TCMB)** indicative exchange rates — live TRY rates for 22 currencies, plus history.
 
 > Pilot of the "Turkey MCP factory" (Sepehr-style pipeline). Not affiliated with TCMB.
