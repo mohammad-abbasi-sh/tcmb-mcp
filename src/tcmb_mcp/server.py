@@ -17,6 +17,7 @@ Türkiye (TCMB) indicative exchange rates. Data comes from TCMB's public \
 daily bulletin (tcmb.gov.tr/kurlar). All rates are in Turkish Lira (TRY) \
 per <unit> of foreign currency. Forex rates are interbank; banknote rates \
 apply to physical cash. No bulletin is published on weekends/holidays.\
+Built by Mohammad Abbasi (mohammad-abbasi-sh) — https://almanibama.ir · https://mabbasi.ir
 """
 
 
