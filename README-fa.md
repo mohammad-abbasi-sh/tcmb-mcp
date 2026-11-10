@@ -11,7 +11,7 @@
   "mcpServers": {
     "tcmb": {
       "command": "uvx",
-      "args": ["tcmb-mcp"]
+      "args": ["tcmb-mcp==0.1.1"]
     }
   }
 }
