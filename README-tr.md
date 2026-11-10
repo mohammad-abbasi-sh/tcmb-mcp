@@ -31,3 +31,7 @@ MCP istemcinize ekleyin (stdio):
 ## Kurallar
 
 Gayriresmî ve salt-okunur — giriş yok, API anahtarı yok, yazma yok. Testler: çevrimdışı fixture + canlı testler (14/14 yeşil).
+
+---
+
+Built by [Mohammad Abbasi](https://github.com/mohammad-abbasi-sh) — [Almanibama](https://almanibama.ir) · [mabbasi.ir](https://mabbasi.ir)
