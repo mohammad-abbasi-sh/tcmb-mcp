@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 import sys
 
 from mcp.server.fastmcp import FastMCP
@@ -21,6 +22,22 @@ Built by Mohammad Abbasi (mohammad-abbasi-sh) — https://almanibama.ir · https
 """
 
 
+_SOURCE = "tcmb.gov.tr"
+_DISCLAIMER = "Unofficial read-only data from tcmb.gov.tr; verify on the site before acting on it."
+
+
+def _envelope() -> dict:
+    return {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "source": _SOURCE,
+        "disclaimer": _DISCLAIMER,
+    }
+
+
+def _ok(payload: dict) -> str:
+    return json.dumps({**_envelope(), **payload}, ensure_ascii=False)
+
+
 def _today() -> dict:
     return _rates.parse_rates(_http.fetch_today_xml())
 
@@ -29,11 +46,8 @@ def _today() -> dict:
 def tcmb_get_rates() -> str:
     """Today's TCMB indicative exchange rates for all currencies (TRY)."""
     d = _today()
-    return json.dumps(
-        {"date": d["date"], "bulletin": d["bulletin"], "count": len(d["rates"]),
-         "rates": d["rates"]},
-        ensure_ascii=False,
-    )
+    return _ok({"date": d["date"], "bulletin": d["bulletin"], "count": len(d["rates"]),
+         "rates": d["rates"]})
 
 
 @mcp.tool()
@@ -43,21 +57,15 @@ def tcmb_get_rate(code: str) -> str:
     r = _rates.find_rate(d, code)
     if r is None:
         known = ", ".join(sorted(x["code"] for x in d["rates"]))
-        return json.dumps(
-            {"error": f"unknown currency code {code!r}", "known_codes": known},
-            ensure_ascii=False,
-        )
-    return json.dumps({"date": d["date"], **r}, ensure_ascii=False)
+        return _ok({"error": f"unknown currency code {code!r}", "known_codes": known})
+    return _ok({"date": d["date"], **r})
 
 
 @mcp.tool()
 def tcmb_list_currencies() -> str:
     """List all currency codes and names in today's TCMB bulletin."""
     d = _today()
-    return json.dumps(
-        {"date": d["date"], "currencies": _rates.list_currencies(d)},
-        ensure_ascii=False,
-    )
+    return _ok({"date": d["date"], "currencies": _rates.list_currencies(d)})
 
 
 @mcp.tool()
@@ -67,12 +75,19 @@ no bulletin on weekends/holidays."""
     try:
         d = _rates.parse_rates(_http.fetch_date_xml(date))
     except _http.TcmbError as e:
-        return json.dumps({"error": str(e)}, ensure_ascii=False)
-    return json.dumps(
-        {"date": d["date"], "bulletin": d["bulletin"], "count": len(d["rates"]),
-         "rates": d["rates"]},
-        ensure_ascii=False,
-    )
+        return _ok({"error": str(e)})
+    return _ok({"date": d["date"], "bulletin": d["bulletin"], "count": len(d["rates"]),
+         "rates": d["rates"]})
+
+
+@mcp.tool()
+def tcmb_health() -> str:
+    """Check whether tcmb.gov.tr is reachable right now.
+
+    Returns status ok (HTTP 200), blocked (HTTP 403/429 — bot wall or
+    rate limit) or error, plus the HTTP status and the probed URL.
+    One polite request; it does not fetch any listings."""
+    return _ok(_http.health_check())
 
 
 def main() -> None:
