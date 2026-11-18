@@ -7,7 +7,7 @@ name = "tcmb-mcp"
 version = "0.1.2"
 description = "Unofficial read-only MCP server for Central Bank of Türkiye (TCMB) exchange rates"
 readme = "README.md"
-license = { text = "MIT" }
+license = { text = "PolyForm-Noncommercial-1.0.0" }
 requires-python = ">=3.10"
 dependencies = [
     "mcp<2",
