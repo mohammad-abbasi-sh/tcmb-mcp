@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use tcmb-mcp, please cite it as below."
+authors:
+  - family-names: "Abbasi"
+    given-names: "Mohammad"
+title: "tcmb-mcp"
+version: 0.1.2
+date-released: 2026-11-10
+url: "https://github.com/mohammad-abbasi-sh/tcmb-mcp"
+repository-code: "https://github.com/mohammad-abbasi-sh/tcmb-mcp"
+license: PolyForm-Noncommercial-1.0.0
+type: software
