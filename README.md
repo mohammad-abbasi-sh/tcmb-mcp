@@ -56,6 +56,14 @@ python3 -m venv .venv && .venv/bin/pip install "mcp<2" httpx pytest
 - `tests/test_rates.py` — offline, parses a real captured bulletin fixture
 - `tests/test_live.py` — 2 cautious live requests against tcmb.gov.tr
 
+## Cite this project
+
+If you use tcmb-mcp, build on it, or write about it, please credit the source:
+
+> Abbasi, Mohammad. *tcmb-mcp*. v0.1.2, 2026. https://github.com/mohammad-abbasi-sh/tcmb-mcp
+
+A ready-to-copy citation is also available from GitHub's **Cite this repository** button (see `CITATION.cff`). Commercial use needs a separate license (see below).
+
 ## License
 
 [PolyForm Noncommercial 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/) — free for personal and non-commercial use; commercial use needs a separate license (see LICENSE).
