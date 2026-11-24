@@ -1,5 +1,7 @@
 # tcmb-mcp 🇹🇷
 
+[![mohammad-abbasi-sh/tcmb-mcp MCP server](https://glama.ai/mcp/servers/mohammad-abbasi-sh/tcmb-mcp/badges/score.svg)](https://glama.ai/mcp/servers/mohammad-abbasi-sh/tcmb-mcp)
+
 mcp-name: io.github.mohammad-abbasi-sh/tcmb-mcp
 
 Unofficial **read-only** MCP server for the **Central Bank of the Republic of Türkiye (TCMB)** indicative exchange rates — live TRY rates for 22 currencies, plus history.
